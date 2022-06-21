@@ -69,8 +69,6 @@ if __name__ == "__main__":
         print("Error while connecting to MySQL", e)
         exit()
 
-    acces_token = "f2473e14bfa63356f7cbb0721d7a371d"
-
     access_granted = 0
     debug = ""
 
@@ -84,8 +82,11 @@ if __name__ == "__main__":
         data = q.get()
 
         if debug == "c":
+
+            accessToken = input("input your access token: ")
+
             for x in data:
-                if  acces_token == x[3] and x[1]:
+                if  accessToken == x[3] and x[1]:
                     access_granted = 1
                     user = x
                     break
