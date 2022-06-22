@@ -54,6 +54,20 @@ def HandleAccessGranted(user):
 
     pusher_client.trigger('update_channel', 'Acces_update', {'message': user})
 
+def CheckAccess(accessToken, data):
+
+    for x in data:
+        if  accessToken == x[3] and x[1]:
+            access_granted = 1
+            user = x
+            break
+
+    if access_granted:
+        HandleAccessGranted(user)
+    else: 
+        print("access denied")
+
+
 if __name__ == "__main__":
 
     try:
@@ -84,17 +98,8 @@ if __name__ == "__main__":
         if debug == "c":
 
             accessToken = input("input your access token: ")
+            CheckAccess(accessToken, data)
 
-            for x in data:
-                if  accessToken == x[3] and x[1]:
-                    access_granted = 1
-                    user = x
-                    break
-
-            if access_granted:
-                HandleAccessGranted(user)
-            else: 
-                print("access denied")
             debug = ''
         elif debug == "u":
             FetchData(q, connection)
